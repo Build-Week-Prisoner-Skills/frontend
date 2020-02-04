@@ -1,15 +1,34 @@
 import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
+import axios from 'axios';
 
 function RegisterComp () {
 
-    const [register, setRegister] = useState({username: '', password: '', adminName: false});
+    const [register, setRegister] = useState({username: '', password: '', name: ''});
 
-    const handleUsername = event => {
-        setRegister({...register, username: event.target.value});
+    const handleChange = event => {
+        setRegister({...register, [event.target.name]: event.target.value});
+        
     }
 
-    const handlePswd
+    const handleRegister = event => {
+        event.preventDefault();
+        console.log('THIS IS REGISTER', register);
+        if (register.username.length > 0 && register.password.length > 0 && register.name.length > 0) {
+            axios
+            .post('https://inmate-skills-backend.herokuapp.com/api/admin/register', register)
+                .then(res => {
+                    alert('You have successfully registered')
+                    console.log(res)
+                    
+                })
+                .catch(error => {
+                    console.log('An error occurred', error);
+                })
+        }
+        else(alert('Please input a username and password'));
+        
+    };
 
 
 
@@ -21,24 +40,27 @@ function RegisterComp () {
 
             <h2>Get Started</h2>
 
-            <form>
-                <label htmlFor="createUserName">
-                    <input type="text" name="createUserName" placeholder="create a user name"/>
+            <form onSubmit={handleRegister}>
+
+                <label htmlFor="name">
+                    <input type="text" name="name" placeholder="first and last name" onChange={handleChange}/>
+                </label>
+
+                <label htmlFor="username">
+                    <input type="text" name="username" placeholder="create a user name" onChange={handleChange}/>
                 </label>
 
                 
-                <label htmlFor="createPassword">
-                    <input type="password" name="createPassword" placeholder="create your password"/>
+                <label htmlFor="password">
+                    <input type="password" name="password" placeholder="create your password" onChange={handleChange}/>
                 </label>
 
                 
-                <label htmlFor="confirmPassword">
+                {/* <label htmlFor="confirmPassword">
                     <input type="password" name="confirmPassword" placeholder="re-enter your password"/>
-                </label>
+                </label> */}
 
-                <label htmlFor="adminPrisoner">
-                    <input type="checkbox" name="adminPrisoner" />
-                </label>
+                
 
                 <Button color="primary" variant="outlined" type="submit">Register</Button>
             </form>
@@ -46,6 +68,6 @@ function RegisterComp () {
 
         </div>
     );
-}
+    }
 
 export default RegisterComp;
