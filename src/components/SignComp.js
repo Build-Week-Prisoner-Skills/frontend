@@ -19,9 +19,10 @@ function SignComp () {
         console.log('THIS IS LOGIN', login);
         if (login.username.length > 0 && login.password.length > 0) {
             axios
-            .post('http://localhost:3333', login)
+            .post('https://inmate-skills-backend.herokuapp.com/api/admin/login', login)
                 .then(res => {
-                    console.log(res)
+                    console.log('THIS THIS', res)
+                    localStorage.setItem('token', res.data.token)
                 })
                 .catch(error => {
                     console.log('An error occurred', error);
