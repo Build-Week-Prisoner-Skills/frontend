@@ -9,7 +9,7 @@ function RegisterComp () {
         setRegister({...register, username: event.target.value});
     }
 
-    const handlePswd
+    //const handlePswd
 
 
 
