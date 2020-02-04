@@ -5,8 +5,11 @@ import  thunk  from 'redux-thunk';
 import './App.css';
 import {BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import Header from './components/Header';
+import SignComp from './components/SignComp';
+import RegisterComp from './components/RegisterComp';
 
 import { reducer } from './reducers/reducer';
+
 
 const store = createStore(reducer, applyMiddleware(thunk));
 
@@ -14,9 +17,11 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
-        <div className="App">
+        <div className="App">  
           <Header />
           {/* routes here */}
+        <SignComp />
+        <RegisterComp />
         </div>
       </Router> 
     </Provider>
