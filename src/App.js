@@ -9,6 +9,7 @@ import SignComp from './components/SignComp';
 import RegisterComp from './components/RegisterComp';
 
 import { reducer } from './reducers/reducer';
+import PrisonerListComp from './components/PrisonerListComp';
 
 
 const store = createStore(reducer, applyMiddleware(thunk));
@@ -28,6 +29,9 @@ function App() {
             <RegisterComp />
           </Route>
 
+          <Route exact path='/'>
+            <PrisonerListComp />
+          </Route>
         </div>
       </Router> 
     </Provider>
