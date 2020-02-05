@@ -11,9 +11,6 @@ function RegisterComp () {
         
     }
 
-<<<<<<< HEAD
-    //const handlePswd
-=======
     const handleRegister = event => {
         event.preventDefault();
         console.log('THIS IS REGISTER', register);
@@ -32,7 +29,6 @@ function RegisterComp () {
         else(alert('Please input a username and password'));
         
     };
->>>>>>> f491aa89bd66d3208a759d8d264136cf6c4f6529
 
 
 

@@ -7,7 +7,7 @@ import {BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-do
 import Header from './components/Header';
 import SignComp from './components/SignComp';
 import RegisterComp from './components/RegisterComp';
-
+import PrisonersList from './components/PrisonersList';
 import { reducer } from './reducers/reducer';
 
 
