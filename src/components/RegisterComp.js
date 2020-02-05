@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 function RegisterComp () {
 
@@ -11,6 +12,8 @@ function RegisterComp () {
         
     }
 
+    let history = useHistory();
+
     const handleRegister = event => {
         event.preventDefault();
         console.log('THIS IS REGISTER', register);
@@ -19,6 +22,7 @@ function RegisterComp () {
             .post('https://inmate-skills-backend.herokuapp.com/api/admin/register', register)
                 .then(res => {
                     alert('You have successfully registered')
+                    history.push('/login');
                     console.log(res)
                     
                 })
