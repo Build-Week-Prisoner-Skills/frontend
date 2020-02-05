@@ -19,3 +19,4 @@ export const fetchAdmins = () => dispatch => {
                 dispatch({ type: FETCHING_FAILURE, payload: err.response });
             });
 }
+

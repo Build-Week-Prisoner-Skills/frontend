@@ -16,15 +16,16 @@ const AdminDash = (props, state) => {
    return <div>admin dashboard
             
             <div>
-            <button onClick={props.fetchAdmins}>Get Admins</button>
-            {!props.admins && !props.isLoading && (<h2> hello admin </h2>
-                )}
+            {!props.admins && !props.isLoading && (<h2> hello admin </h2>)}
                 {props.isLoading && (
                     <h1>Fetching data...</h1>
                 )}
                 {console.log(props, 'props from admin card')}
-                {props.admins && !props.isLoading && <h2>{props.admins.map(obj =>{return (<div> {obj.name}, {obj.username}, {obj.prison_name}</div>)})}</h2>}
+                <h2>Admins</h2>
+                {props.admins && !props.isLoading && <h2>{props.admins.map(obj =>{return (<p> {obj.name}, {obj.username}, {obj.prison_name}</p>)})}</h2>}
             </div>
+
+            
         </div>
 }
 
