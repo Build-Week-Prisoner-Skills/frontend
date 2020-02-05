@@ -1,15 +1,15 @@
 //index from actions
 
-import axios from 'axios';
+import axiosWithAuth from '../utils/axiosWithAuth';
 
 export const FETCHING_START = 'FETCHING_START';
 export const FETCHING_SUCCESS = 'FETCHING_SUCCESS';
 export const FETCHING_FAILURE = 'FETCHING_FAILURE';
 
-export const fetchPrisoners = () => dispatch => {
+export const fetchAdmins = () => dispatch => {
     dispatch({ type: FETCHING_START });
-        axios
-            .get(`https://inmate-skills-backend.herokuapp.com/api/inmates`)
+        axiosWithAuth()
+            .get(`/api/admin`)
             .then(res => {
                 console.log("success", res.data)
                 dispatch({ type: FETCHING_SUCCESS, payload: res.data});

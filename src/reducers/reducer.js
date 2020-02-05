@@ -6,7 +6,7 @@ import {
 
 const initialState = {
     isLoading: false,
-    prisoners: null,
+    admins: null,
     error: ''
 }
 
@@ -21,7 +21,7 @@ export const reducer = (state = initialState, action) => {
             return{
                 ...state,
                 isLoading: false,
-                prisoners: action.payload
+                admins: action.payload
             }
         default:
             return state;
