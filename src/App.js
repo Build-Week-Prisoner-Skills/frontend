@@ -20,7 +20,7 @@ function App() {
         <div className="App">  
           <Header />
           {/* routes here */}
-          <Route exact path="/">
+          <Route path="/login">
             <SignComp />
           </Route>
 

@@ -2,6 +2,19 @@ import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 
+const SignCompDiv = {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    border: '1px solid red',
+    maxWidth: '500px',
+
+}
+
+const SignCompBtn = {
+    width: '60px',
+}
+
 function SignComp () {
 
     const [login, setLogin] = useState({username: '', password: ''});
@@ -39,7 +52,7 @@ function SignComp () {
 
             <h1>Welcome to Prisoner Skills</h1>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} style={SignCompDiv}>
                 <label htmlFor="login">Login
                     <input type="text" name="login" placeholder="enter your username" onChange={handleNameChange} value={login.username}/>
                 </label>
@@ -48,7 +61,7 @@ function SignComp () {
                     <input type="password" name="pswd" placeholder="enter your password" onChange={handlePswdChange} value={login.password}/>
                 </label>
 
-                <Button color="secondary" variant="outlined" type="submit">Submit</Button>
+                <Button color="secondary" variant="outlined" type="submit" style={SignCompBtn}>Submit</Button>
             </form>
 
 
