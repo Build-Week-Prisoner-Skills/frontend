@@ -20,8 +20,14 @@ function App() {
         <div className="App">  
           <Header />
           {/* routes here */}
-        <SignComp />
-        <RegisterComp />
+          <Route path="/login">
+            <SignComp />
+          </Route>
+
+          <Route path='/register'>
+            <RegisterComp />
+          </Route>
+
         </div>
       </Router> 
     </Provider>
