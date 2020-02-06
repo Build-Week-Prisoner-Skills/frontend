@@ -57,11 +57,11 @@ function RegisterComp () {
         event.preventDefault();
         console.log('THIS IS REGISTER', register);
         if (register.username.length > 0 && register.password.length > 0 && register.name.length > 0) {
-            axios
+            axios.all
             .post('https://inmate-skills-backend.herokuapp.com/api/admin/register', register)
                 .then(res => {
                     alert('You have successfully registered')
-                    history.push('/login');
+                    history.push('/prisonReg');
                     console.log(res)
                     
                 })
