@@ -32,7 +32,7 @@ function App() {
           <Route path="/login">
             <SignComp />
           </Route>
-          <PrivateRoute path="/admin" component={AdminDash}/>
+          <PrivateRoute exact path="/admin" component={AdminDash}/>
 
           <Route path='/register'>
             <RegisterComp />
