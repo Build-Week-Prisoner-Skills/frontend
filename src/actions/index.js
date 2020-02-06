@@ -1,10 +1,13 @@
 //index from actions
-
 import axiosWithAuth from '../utils/axiosWithAuth';
 
 export const FETCHING_START = 'FETCHING_START';
 export const FETCHING_SUCCESS = 'FETCHING_SUCCESS';
 export const FETCHING_FAILURE = 'FETCHING_FAILURE';
+
+export const ADDING_START = 'ADDING_START';
+export const ADDING_SUCCESS = 'ADDING_SUCCESS';
+export const ADDING_FAILURE = 'ADDING_FAILURE';
 
 export const fetchAdmins = () => dispatch => {
     dispatch({ type: FETCHING_START });
@@ -20,3 +23,16 @@ export const fetchAdmins = () => dispatch => {
             });
 }
 
+export const addWorker = newWorker => dispatch =>{
+    dispatch({ type: ADDING_START });
+        axiosWithAuth()
+            .put(`/api/admin/inmates`, newWorker)
+            .then(res =>{
+                console.log("added worker", res.data)
+                dispatch({type: ADDING_SUCCESS, payload:res.data})
+            })
+            .catch(err => {
+                console.log("error", err)
+                dispatch({ type: ADDING_FAILURE, payload: err.response})
+            })
+}
