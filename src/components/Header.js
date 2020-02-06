@@ -16,9 +16,6 @@ const Header = () => {
             
         
 
-        // nav bar with links to login, register, and home
-
-        // login and register should connect to one another
     )
 }
 
