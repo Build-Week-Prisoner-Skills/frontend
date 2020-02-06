@@ -17,6 +17,12 @@ const AdminDash = (props) => {
         skills: '',
         availability: ''
     })
+    const [editWorker, setEditWorker] = useState({
+        name: '',
+        work_exp: '',
+        skills: '',
+        availability: ''
+    })
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -29,14 +35,31 @@ const AdminDash = (props) => {
     }
 
     const handleChange = event => {
-        setNewWorker({...newWorker, [event.target.name]: event.target.value});
+        setNewWorker({...newWorker, [event.target.name]: event.target.value})
         
     }
-    const history = useHistory();
-
-    const handleEdit = id => {
-        history.push('/admin/edit')
+    const editInmate = inmate => {
+        console.log(inmate, "editInmate")
+        setEditWorker(inmate)
     }
+
+    const handleEdit = e => { //changes original values via form
+        setEditWorker({...editWorker, [e.target.name]: e.target.value});
+    }
+
+    const submitEdit = e => {
+        e.preventDefault();
+        console.log(editWorker);
+        axiosWithAuth()
+            .put(`api/admin/inmates/${editWorker.id}`, editWorker)
+            .then(res => {
+                console.log(res,"response from edit")
+            })
+            .catch(err => {
+                console.log(err, "error from submitEdit")
+            })
+    }
+    const history = useHistory();
 
     useEffect(() => {       //fetches admins
         props.fetchAdmins()
@@ -114,13 +137,48 @@ const AdminDash = (props) => {
                 return (
                 <div>
                     <p>{inmate.name}</p>
-                    <button onClick={()=>handleEdit(inmate)}>Edit</button>
+                    <button onClick={()=>editInmate(inmate)}>Edit</button>
                     <button onClick={()=>handleDelete(inmate.id)}>Delete</button>
                 </div>
                 )
             })}
 
-    </div>
+                </div>
+                <form onSubmit={submitEdit}>
+                    <label>Name:
+                        <input 
+                        type="text" 
+                        name="name"
+                        value={editWorker.name}
+                        onChange={handleEdit}/>
+                    </label>
+                    <br/>
+                    <label>Experience:
+                        <input
+                        type="text" 
+                        name="work_exp"
+                        value={editWorker.work_exp}
+                        onChange={handleEdit}/>
+                    </label> 
+                    <br/>
+                    <label>Skills:
+                        <input
+                        type="text" 
+                        name="skills"
+                        value={editWorker.skills}
+                        onChange={handleEdit}/>
+                    </label>
+                    <br/>
+                    <label>Availability:
+                        <input
+                        type="text" 
+                        name="availability"
+                        value={editWorker.availability}
+                        onChange={handleEdit}/>
+                    </label>
+                    <br/>
+                    <button type="submit">Submit</button>
+                </form>
 
             </div>
 
@@ -135,10 +193,6 @@ const mapStateToProps = state => {
         error: state.reducer.error,
         workers: state.workerReducer.workers
     }
-}
-
-export const EditWorker = () => {
-    return <p>hello world</p>
 }
 
 

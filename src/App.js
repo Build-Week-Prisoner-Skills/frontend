@@ -14,7 +14,7 @@ import Header from './components/Header';
 import SignComp from './components/SignComp';
 import RegisterComp from './components/RegisterComp';
 import PrivateRoute from './components/PrivateRoute';
-import AdminDash, {EditWorker} from './components/AdminDash';
+import AdminDash from './components/AdminDash';
 import PrisonerListComp from './components/PrisonerListComp';
 import rootReducer from './reducers';
 
@@ -33,7 +33,6 @@ function App() {
             <SignComp />
           </Route>
           <PrivateRoute exact path="/admin" component={AdminDash}/>
-          <PrivateRoute path="/admin/edit" component={EditWorker}/>
 
           <Route path='/register'>
             <RegisterComp />
