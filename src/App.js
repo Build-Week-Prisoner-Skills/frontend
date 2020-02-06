@@ -1,18 +1,26 @@
 import React from 'react';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
+import {BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import  thunk  from 'redux-thunk';
 import './App.css';
-import {BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import logger from 'redux-logger';
+
+//reducer
+import { reducer } from './reducers/reducer';
+
+//components
 import Header from './components/Header';
 import SignComp from './components/SignComp';
 import RegisterComp from './components/RegisterComp';
-
-import { reducer } from './reducers/reducer';
+import PrivateRoute from './components/PrivateRoute';
+import AdminDash from './components/AdminDash';
 import PrisonerListComp from './components/PrisonerListComp';
+import rootReducer from './reducers';
 
 
-const store = createStore(reducer, applyMiddleware(thunk));
+
+const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
 function App() { 
   return (
@@ -24,6 +32,7 @@ function App() {
           <Route path="/login">
             <SignComp />
           </Route>
+          <PrivateRoute path="/admin" component={AdminDash}/>
 
           <Route path='/register'>
             <RegisterComp />

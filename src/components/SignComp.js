@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 const SignCompDiv = {
     display: 'flex',
@@ -49,6 +50,8 @@ function SignComp () {
 
     const [login, setLogin] = useState({username: '', password: ''});
 
+    let history = useHistory();
+
     const handleNameChange = event => {
         setLogin({...login, username: event.target.value});
     }
@@ -66,6 +69,7 @@ function SignComp () {
                 .then(res => {
                     console.log('THIS THIS', res)
                     localStorage.setItem('token', res.data.token)
+                    history.push('/admin');
                 })
                 .catch(error => {
                     console.log('An error occurred', error);
