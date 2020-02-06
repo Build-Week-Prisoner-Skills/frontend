@@ -5,7 +5,7 @@ import axiosWithAuth from '../utils/axiosWithAuth';
 
 const AdminDash = (props) => {
 
-    console.log(props, "props from admindash");
+    //console.log(props, "props from admindash");
 
     const [admins, setAdmins] = useState({
         name: '',
@@ -16,6 +16,36 @@ const AdminDash = (props) => {
         skills: '',
         availability: ''
     })
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        console.log(newWorker);
+        props.addWorker(newWorker);
+    }
+    
+    const handleDelete = id => {
+        axiosWithAuth()
+            .delete(`api/admin/inmates/${id}`)
+            .then(res => console.log(res, 'deleted'))
+            .catch(err => console.log(err, "delete error"))
+    }
+    const [inmates, setInmates] = useState([]);
+
+    useEffect(() => {
+        axiosWithAuth()
+            .get(`api/admin/inmates`)
+            .then(res => {
+                console.log('fetched inmates', res.data)
+                setInmates(res.data)
+            })
+            .catch(err => {
+                console.log(err, "error fetching inmates")
+            })
+    },[setInmates, props.addWorker])
+
+
+   
+
     useEffect(() => {
         props.fetchAdmins()
         axiosWithAuth()
@@ -31,20 +61,19 @@ const AdminDash = (props) => {
                 localStorage.setItem('token', res.data.token)
             })
             .catch(error => {
-                console.log('error', error);
+                //console.log('error', error);
             })
         
     },[]);
+
+    
 
     const handleChange = event => {
         setNewWorker({...newWorker, [event.target.name]: event.target.value});
         
     }
-    const handleSubmit = e => {
-        e.preventDefault();
-        console.log(newWorker);
-        props.addWorker(newWorker);
-    }
+
+
 
     
    return <div>admin dashboard
@@ -54,7 +83,7 @@ const AdminDash = (props) => {
                 {props.isLoading && (
                     <h1>Fetching data...</h1>
                 )}
-                {console.log(props, 'props from admin card')}
+                {/* {console.log(props, 'props from admin card')} */}
 
                 <h2>Admins</h2>
                 {props.admins && !props.isLoading && <h2>{props.admins.map(obj =>{return (<p> {obj.name}, {obj.username}, {obj.prison_name}</p>)})}</h2>}
@@ -94,20 +123,34 @@ const AdminDash = (props) => {
                     <button type="submit">Submit</button>
                 </form>
 
-                <h2>Delete Worker</h2>
-                <h2>Update Worker</h2>
+                <div>
+        <h1>Update Inmates</h1>
+        
+            {inmates.map((inmate) => {
+                return (
+                <div>
+                    <p>{inmate.name}</p>
+                    <p>{inmate.id}</p>
+                    <button onClick={()=>handleDelete(inmate.id)}>Delete</button>
+                </div>
+                )
+            })}
+
+    </div>
+
             </div>
 
         </div>
 }
 
 const mapStateToProps = state => {
-    console.log(state, "state from mapStateToProps");
+    // console.log(state, "state from mapStateToProps");
     return{
         isLoading: state.reducer.isLoading,
         admins: state.reducer.admins,
         error: state.reducer.error
     }
 }
+
 
 export default connect(mapStateToProps, {fetchAdmins, addWorker})(AdminDash);

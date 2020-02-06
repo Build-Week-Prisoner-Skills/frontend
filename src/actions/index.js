@@ -9,6 +9,10 @@ export const ADDING_START = 'ADDING_START';
 export const ADDING_SUCCESS = 'ADDING_SUCCESS';
 export const ADDING_FAILURE = 'ADDING_FAILURE';
 
+// export const DELETING_START = 'DELETING_START';
+// export const DELETING_SUCCESS = 'DELETING_SUCCESS';
+// export const DELETING_FAILURE = 'DELETING_FAILURE';
+
 export const fetchAdmins = () => dispatch => {
     dispatch({ type: FETCHING_START });
         axiosWithAuth()
@@ -36,3 +40,16 @@ export const addWorker = newWorker => dispatch =>{
                 dispatch({ type: ADDING_FAILURE, payload: err.response})
             })
 }
+// export const deleteWorker = id => dispatch =>{
+//     dispatch({ type: ADDING_START });
+//         axiosWithAuth()
+//             .delete(`/api/admin/inmates${id}`)
+//             .then(res =>{
+//                 console.log("deleted", res.data)
+//                 dispatch({type: ADDING_SUCCESS, payload:res.data})
+//             })
+//             .catch(err => {
+//                 console.log("error", err.message)
+//                 dispatch({ type: ADDING_FAILURE, payload: err.response})
+//             })
+// }
