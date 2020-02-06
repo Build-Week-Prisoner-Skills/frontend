@@ -26,13 +26,13 @@ export const fetchAdmins = () => dispatch => {
 export const addWorker = newWorker => dispatch =>{
     dispatch({ type: ADDING_START });
         axiosWithAuth()
-            .put(`/api/admin/inmates`, newWorker)
+            .post(`/api/admin/inmates`, newWorker)
             .then(res =>{
                 console.log("added worker", res.data)
                 dispatch({type: ADDING_SUCCESS, payload:res.data})
             })
             .catch(err => {
-                console.log("error", err)
+                console.log("error", err.message)
                 dispatch({ type: ADDING_FAILURE, payload: err.response})
             })
 }

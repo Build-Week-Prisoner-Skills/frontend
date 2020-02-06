@@ -4,6 +4,7 @@ import {createStore, applyMiddleware} from 'redux';
 import {BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import  thunk  from 'redux-thunk';
 import './App.css';
+import logger from 'redux-logger';
 
 //reducer
 import { reducer } from './reducers/reducer';
@@ -15,10 +16,11 @@ import RegisterComp from './components/RegisterComp';
 import PrivateRoute from './components/PrivateRoute';
 import AdminDash from './components/AdminDash';
 import PrisonerListComp from './components/PrisonerListComp';
+import rootReducer from './reducers';
 
 
 
-const store = createStore(reducer, applyMiddleware(thunk));
+const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
 function App() { 
   return (

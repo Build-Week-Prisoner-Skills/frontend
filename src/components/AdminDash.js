@@ -3,7 +3,9 @@ import {connect} from 'react-redux';
 import { fetchAdmins, addWorker } from '../actions';
 import axiosWithAuth from '../utils/axiosWithAuth';
 
-const AdminDash = (props, state) => {
+const AdminDash = (props) => {
+
+    console.log(props, "props from admindash");
 
     const [admins, setAdmins] = useState({
         name: '',
@@ -16,6 +18,21 @@ const AdminDash = (props, state) => {
     })
     useEffect(() => {
         props.fetchAdmins()
+        axiosWithAuth()
+            .post(`api/admin/facilities`, {
+                name: "Parnall Correctional Facility",
+                address: "1780 East Parnall Road",
+                city: "Jackson",
+                state: "MI",
+                postal_code: "49201"})
+            .then(res => {
+                console.log('added prison', res.data)
+                localStorage.removeItem('token');
+                localStorage.setItem('token', res.data.token)
+            })
+            .catch(error => {
+                console.log('error', error);
+            })
         
     },[]);
 
@@ -26,8 +43,9 @@ const AdminDash = (props, state) => {
     const handleSubmit = e => {
         e.preventDefault();
         console.log(newWorker);
-        addWorker(newWorker);
+        props.addWorker(newWorker);
     }
+
     
    return <div>admin dashboard
             
@@ -41,6 +59,7 @@ const AdminDash = (props, state) => {
                 <h2>Admins</h2>
                 {props.admins && !props.isLoading && <h2>{props.admins.map(obj =>{return (<p> {obj.name}, {obj.username}, {obj.prison_name}</p>)})}</h2>}
             </div>
+            
             <div>
                 <h2>Add Worker</h2>
                 <form onSubmit={handleSubmit}>
@@ -85,9 +104,9 @@ const AdminDash = (props, state) => {
 const mapStateToProps = state => {
     console.log(state, "state from mapStateToProps");
     return{
-        isLoading: state.isLoading,
-        admins: state.admins,
-        error: state.error
+        isLoading: state.reducer.isLoading,
+        admins: state.reducer.admins,
+        error: state.reducer.error
     }
 }
 
