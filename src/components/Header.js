@@ -4,14 +4,28 @@ import React from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core';
 
+const navDiv = {
+    display: 'flex',
+    justifyContent: 'space-evenly',
+    marginTop: '10px',
+}
+
+const links = {
+    textDecoration: 'none',
+    color: '#C0B283',
+    fontWeight: 'bold',
+}
+
 const Header = () => {
 
     return(
         
-        <div>
-            <Link to='/'>Home</Link>
-            <Link to='/login'>Login</Link>
-            <Link to='/register'>Register</Link>
+        <div style={navDiv}>
+
+            <Link to='/' style={links}>Home</Link>
+            <Link to='/login' style={links}>Login</Link>
+            <Link to='/register' style={links}>Register</Link>
+
         </div>
             
         
