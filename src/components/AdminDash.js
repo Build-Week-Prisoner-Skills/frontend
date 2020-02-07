@@ -1,8 +1,73 @@
 import React, {useEffect, useState} from 'react';
+import Button from '@material-ui/core/Button';
 import {connect} from 'react-redux';
 import { fetchAdmins, addWorker, fetchInmates, deleteWorker } from '../actions';
 import axiosWithAuth from '../utils/axiosWithAuth';
 import { useHistory, Link } from 'react-router-dom';
+
+const wrapper ={
+    color: 'rgb(192, 178, 131)',
+    backgroundColor: 'rgb(244, 244, 244)', 
+}
+
+const adminList = {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-evenly',
+    alignItems: 'space-evenly',
+    width: '400px',
+    border: '3px solid rgb(192, 178, 131)',
+    borderRadius: '15px',
+    margin: '0 auto',
+}
+
+const adminInfo = { 
+    margin: '2%',
+    padding: '3%',
+    color: 'black',
+}    
+
+const input = {
+    marginLeft: '15px',
+    borderRadius: '10px',
+    height: '10px',
+    padding: '10px',
+    border: '3px solid #dcd0c0',
+}
+
+const inmateContainer = {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    margin: '0 auto',
+}
+
+const inmateInfo = {
+    border: '3px solid rgb(192, 178, 131)',
+    borderRadius: '15px',
+    width: '300px',
+    margin: '2%',
+    color: 'black'
+}
+
+const formContainer = {
+    width: '400px',
+    margin: '0 auto',
+
+}
+
+const form ={
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    alignItems: 'flex-end',
+    paddingRight: '100px'
+}
+
+const button = {
+    margin: '2%'
+}
 
 const AdminDash = (props) => {
 
@@ -83,9 +148,9 @@ const AdminDash = (props) => {
     },[]);
 
         
-   return <div>admin dashboard
+   return <div style={wrapper} className='wrapper' >admin dashboard
             
-            <div>
+            <div style={adminList} className='admins'>
             {!props.admins && !props.isLoading && (<h2> hello admin </h2>)}
                 {props.isLoading && (
                     <h1>Fetching data...</h1>
@@ -93,14 +158,15 @@ const AdminDash = (props) => {
                 {/* {console.log(props, 'props from admin card')} */}
 
                 <h2>Admins</h2>
-                {props.admins && !props.isLoading && <div>{props.admins.map(obj =>{return (<p> {obj.name}, {obj.username}, {obj.prison_name}</p>)})}</div>}
+                {props.admins && !props.isLoading && <div style={adminInfo}>{props.admins.map(obj =>{return (<p> {obj.name}, {obj.username}, {obj.prison_name}</p>)})}</div>}
             </div>
             
-            <div>
+            <div style={formContainer}>
                 <h2>Add Worker</h2>
-                <form onSubmit={handleSubmit}>
+                <form style={form} onSubmit={handleSubmit}>
                     <label>Name:
                         <input 
+                        style={input}
                         type="text" 
                         name="name"
                         onChange={handleChange}/>
@@ -108,6 +174,7 @@ const AdminDash = (props) => {
                     <br/>
                     <label>Experience:
                         <input
+                        style={input}
                         type="text" 
                         name="work_exp"
                         onChange={handleChange}/>
@@ -115,6 +182,7 @@ const AdminDash = (props) => {
                     <br/>
                     <label>Skills:
                         <input
+                        style={input}
                         type="text" 
                         name="skills"
                         onChange={handleChange}/>
@@ -122,31 +190,33 @@ const AdminDash = (props) => {
                     <br/>
                     <label>Availability:
                         <input
+                        style={input}
                         type="text" 
                         name="availability"
                         onChange={handleChange}/>
                     </label>
                     <br/>
-                    <button type="submit">Submit</button>
+                    <Button color="primary" variant="outlined" type="submit">Submit</Button>
                 </form>
 
-                <div>
-        <h1>Update Inmates</h1>
+                <div style={inmateContainer}>
         {console.log(props, "props in admindashboard")}
             {props.workers.map((inmate) => {
                 return (
-                <div>
+                <div style={inmateInfo} className='inmates'>
                     <p>{inmate.name}</p>
-                    <button onClick={()=>editInmate(inmate)}>Edit</button>
-                    <button onClick={()=>handleDelete(inmate.id)}>Delete</button>
+                    <Button style={button} variant="outlined" color="primary" size='small' onClick={()=>editInmate(inmate)}>Edit</Button>
+                    <Button style={button} variant="contained" color="secondary" size='small' onClick={()=>handleDelete(inmate.id)}>Delete</Button>
                 </div>
                 )
             })}
 
                 </div>
-                <form onSubmit={submitEdit}>
+                <h2>Update Inmates</h2>
+                <form style={form} onSubmit={submitEdit}>
                     <label>Name:
                         <input 
+                        style={input}
                         type="text" 
                         name="name"
                         value={editWorker.name}
@@ -155,6 +225,7 @@ const AdminDash = (props) => {
                     <br/>
                     <label>Experience:
                         <input
+                        style={input}
                         type="text" 
                         name="work_exp"
                         value={editWorker.work_exp}
@@ -163,6 +234,7 @@ const AdminDash = (props) => {
                     <br/>
                     <label>Skills:
                         <input
+                        style={input}
                         type="text" 
                         name="skills"
                         value={editWorker.skills}
@@ -171,13 +243,14 @@ const AdminDash = (props) => {
                     <br/>
                     <label>Availability:
                         <input
+                        style={input}
                         type="text" 
                         name="availability"
                         value={editWorker.availability}
                         onChange={handleEdit}/>
                     </label>
                     <br/>
-                    <button type="submit">Submit</button>
+                    <Button color="secondary" variant="outlined" type="submit">Submit</Button>
                 </form>
 
             </div>
