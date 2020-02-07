@@ -22,6 +22,11 @@ const inmates = {
     color: 'black'
 }
 
+const link = {
+    textDecoration: 'none',
+    cursor: 'pointer',
+    color: 'rgb(192, 178, 131)',
+}
 
 function PrisonerListComp () {
 
@@ -43,7 +48,7 @@ function PrisonerListComp () {
 return (
 
     <div style={wrapper} className='wrapper'>
-        <h1>Inmates you can hire</h1>
+        <a style={link} href='https://pedantic-mcclintock-5bee3b.netlify.com/' target='blank' rel='noopener'><h1>Prisoner Skills</h1></a>
         <div style={inmateList} className='inmate-list'>
         {data.map((inmate) => {
             return (
