@@ -23,8 +23,10 @@ const Header = () => {
         <div style={navDiv}>
 
             <Link to='/' style={links}>Home</Link>
+            <Link to='/facilities' style={links}>Facilities</Link>
             <Link to='/login' style={links}>Login</Link>
             <Link to='/register' style={links}>Register</Link>
+            
 
         </div>
             

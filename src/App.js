@@ -17,6 +17,7 @@ import PrivateRoute from './components/PrivateRoute';
 import AdminDash from './components/AdminDash';
 import PrisonerListComp from './components/PrisonerListComp';
 import rootReducer from './reducers';
+import PrisonList from './prison-components/PrisonList';
 
 
 
@@ -40,6 +41,10 @@ function App() {
 
           <Route exact path='/'>
             <PrisonerListComp />
+          </Route>
+          
+          <Route exact path='/facilities'>
+            <PrisonList/> 
           </Route>
         </div>
       </Router> 
