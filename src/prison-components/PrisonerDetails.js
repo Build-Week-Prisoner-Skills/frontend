@@ -41,7 +41,7 @@ const PrisonerDetails = (props) => {
                 <h2><b>Skills:</b> {prisoner.skills}</h2>
                 <h2><b>Availiblity type:</b> {prisoner.availability}</h2>
                 <h2><b>Facility:</b> {prisoner.facility}</h2>
-                <h2><b>ZIP:</b> {prisoner.postal_code}</h2>
+                <h2><b>ZIP:</b>  {prisoner.postal_code}</h2>
                     
             </div>
         </div>
