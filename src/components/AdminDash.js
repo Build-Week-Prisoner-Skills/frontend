@@ -93,6 +93,12 @@ const AdminDash = (props) => {
         e.preventDefault();
         console.log(newWorker);
         props.addWorker(newWorker);
+        setNewWorker({
+            name: '',
+            work_exp: '',
+            skills: '',
+            availability: ''
+        })
     }
     
     const handleDelete = id => {
@@ -123,6 +129,12 @@ const AdminDash = (props) => {
             .catch(err => {
                 console.log(err, "error from submitEdit")
             })
+        setEditWorker({
+            name: '',
+            work_exp: '',
+            skills: '',
+            availability: ''
+        })
     }
     const history = useHistory();
 
@@ -169,6 +181,7 @@ const AdminDash = (props) => {
                         style={input}
                         type="text" 
                         name="name"
+                        value={newWorker.name}
                         onChange={handleChange}/>
                     </label>
                     <br/>
@@ -177,6 +190,7 @@ const AdminDash = (props) => {
                         style={input}
                         type="text" 
                         name="work_exp"
+                        value={newWorker.work_exp}
                         onChange={handleChange}/>
                     </label> 
                     <br/>
@@ -185,6 +199,7 @@ const AdminDash = (props) => {
                         style={input}
                         type="text" 
                         name="skills"
+                        value={newWorker.skills}
                         onChange={handleChange}/>
                     </label>
                     <br/>
@@ -193,6 +208,7 @@ const AdminDash = (props) => {
                         style={input}
                         type="text" 
                         name="availability"
+                        value={newWorker.availability}
                         onChange={handleChange}/>
                     </label>
                     <br/>
