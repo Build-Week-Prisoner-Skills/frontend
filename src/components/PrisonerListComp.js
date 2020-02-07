@@ -1,6 +1,32 @@
 import React, { useState, useEffect }from 'react';
 import axios from 'axios';
 
+const wrapper ={
+    color: 'rgb(192, 178, 131)',
+    backgroundColor: 'rgb(244, 244, 244)',
+}
+
+const inmateList = {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-evenly',
+    alignItems: 'space-evenly',
+}
+
+const inmates = {
+    border: '3px solid rgb(192, 178, 131)',
+    borderRadius: '15px',
+    width: '300px',
+    margin: '2%',
+    padding: '3%',
+    color: 'black'
+}
+
+const link = {
+    textDecoration: 'none',
+    cursor: 'pointer',
+    color: 'rgb(192, 178, 131)',
+}
 
 function PrisonerListComp () {
 
@@ -21,19 +47,19 @@ function PrisonerListComp () {
 
 return (
 
-    <div>
-        <h1>Inmates you can hire</h1>
-        
+    <div style={wrapper} className='wrapper'>
+        <a style={link} href='https://pedantic-mcclintock-5bee3b.netlify.com/' target='blank' rel='noopener'><h1>Prisoner Skills</h1></a>
+        <div style={inmateList} className='inmate-list'>
         {data.map((inmate) => {
             return (
-                <div>
-                    <p>{inmate.name}</p>
-                    <p>{inmate.skills}</p>
-                    <p>{inmate.availability}</p>
+                <div style={inmates} className='inmate'>
+                    <h4>{inmate.name}</h4>
+                    <p><b>Skills:</b> {inmate.skills}</p>
+                    <p><b>Availiblity type:</b> {inmate.availability}</p>
                 </div>
             )
         })}
-
+        </div>
     </div>
 )
 

@@ -23,8 +23,12 @@ const Header = () => {
         <div style={navDiv}>
 
             <Link to='/' style={links}>Home</Link>
+            <Link to='/facilities' style={links}>Facilities</Link>
+            <Link to='/admin' style={links}>Dashboard</Link>
             <Link to='/login' style={links}>Login</Link>
             <Link to='/register' style={links}>Register</Link>
+            <Link to='/' onClick={()=> localStorage.removeItem('token')} style={links}>Logout</Link>
+            
 
         </div>
             

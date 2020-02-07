@@ -3,6 +3,10 @@ import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
+const wrapper ={
+    backgroundColor: 'rgb(244, 244, 244)',
+}
+
 const SignCompDiv = {
     display: 'flex',
     flexDirection: 'column',
@@ -12,7 +16,6 @@ const SignCompDiv = {
     marginLeft: '400px',
     height: '400px',
     borderRadius: '15px',
-
 }
 
 const input1 = {
@@ -79,7 +82,7 @@ function RegisterComp () {
 
     return (
 
-        <div>
+        <div style={wrapper}>
 
             <h2 style={heading}>Get Started</h2>
 
