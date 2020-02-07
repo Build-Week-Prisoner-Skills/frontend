@@ -18,6 +18,7 @@ import AdminDash from './components/AdminDash';
 import PrisonerListComp from './components/PrisonerListComp';
 import rootReducer from './reducers';
 import PrisonList from './prison-components/PrisonList';
+import PrisonerDetails from './prison-components/PrisonerDetails';
 
 
 
@@ -42,9 +43,13 @@ function App() {
           <Route exact path='/'>
             <PrisonerListComp />
           </Route>
-          
+
           <Route exact path='/facilities'>
             <PrisonList/> 
+          </Route>
+
+          <Route exact path='/inmate/:id'>
+            <PrisonerDetails/> 
           </Route>
         </div>
       </Router> 
