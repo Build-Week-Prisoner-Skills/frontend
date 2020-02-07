@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Button from '@material-ui/core/Button';
 import {connect} from 'react-redux';
-import { fetchAdmins, addWorker, fetchInmates, deleteWorker } from '../actions';
+import { fetchAdmins, addWorker, fetchInmates, deleteWorker, updateWorker } from '../actions';
 import axiosWithAuth from '../utils/axiosWithAuth';
 import { useHistory, Link } from 'react-router-dom';
 
@@ -121,20 +121,18 @@ const AdminDash = (props) => {
     const submitEdit = e => {
         e.preventDefault();
         console.log(editWorker);
-        axiosWithAuth()
-            .put(`api/admin/inmates/${editWorker.id}`, editWorker)
-            .then(res => {
-                console.log(res,"response from edit")
-            })
-            .catch(err => {
-                console.log(err, "error from submitEdit")
-            })
-        setEditWorker({
-            name: '',
-            work_exp: '',
-            skills: '',
-            availability: ''
-        })
+
+        // axiosWithAuth()
+        //     .put(`api/admin/inmates/${editWorker.id}`, editWorker)
+        //     .then(res => {
+        //         console.log(res,"response from edit")
+        //     })
+        //     .catch(err => {
+        //         console.log(err, "error from submitEdit")
+        //     })
+        //console.log(updateWorker(editWorker), "from submitEdit")
+        props.updateWorker(editWorker);
+
     }
     const history = useHistory();
 
@@ -285,4 +283,4 @@ const mapStateToProps = state => {
 }
 
 
-export default connect(mapStateToProps, {fetchAdmins, addWorker, fetchInmates, deleteWorker})(AdminDash);
+export default connect(mapStateToProps, {fetchAdmins, addWorker, fetchInmates, deleteWorker, updateWorker})(AdminDash);

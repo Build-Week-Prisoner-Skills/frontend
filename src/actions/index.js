@@ -17,6 +17,10 @@ export const DELETING_START = 'DELETING_START';
 export const DELETING_SUCCESS = 'DELETING_SUCCESS';
 export const DELETING_FAILURE = 'DELETING_FAILURE';
 
+export const EDITING_START = 'EDITING_START';
+export const EDITING_SUCCESS = 'EDITING_SUCCESS';
+export const EDITING_FAILURE = 'EDITING_FAILURE';
+
 export const fetchAdmins = () => dispatch => {
     dispatch({ type: FETCHING_START });
         axiosWithAuth()
@@ -69,5 +73,19 @@ export const deleteWorker = id => dispatch =>{
             .catch(err => {
                 console.log("error", err.message)
                 dispatch({ type: DELETING_FAILURE, payload: err.response})
+            })
+}
+export const updateWorker = editWorker => dispatch =>{
+    console.log(editWorker, 'from updateWorker')
+    dispatch({ type: EDITING_START });
+        axiosWithAuth()
+            .put(`/api/admin/inmates/${editWorker.id}`, editWorker)
+            .then(res =>{
+                console.log("updating", res.data)
+                dispatch({type: EDITING_SUCCESS, payload:res.data})
+            })
+            .catch(err => {
+                console.log("error", err.message)
+                dispatch({ type: EDITING_FAILURE, payload: err.response})
             })
 }

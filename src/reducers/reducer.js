@@ -10,7 +10,10 @@ import {
     ADDING_FAILURE,
     DELETING_START,
     DELETING_SUCCESS,
-    DELETING_FAILURE
+    DELETING_FAILURE,
+    EDITING_START,
+    EDITING_SUCCESS,
+    EDITING_FAILURE
 
 
 } from '../actions/index';
@@ -101,6 +104,23 @@ export const workerReducer = (state = initialWorker, action) => {
                 })
             }
         case DELETING_FAILURE:
+            return{
+            ...state,
+            isLoading: false,
+            error: action.payload
+        }
+        case EDITING_START:
+            return {
+                ...state,
+                isLoading: true
+            };
+        case EDITING_SUCCESS:
+            return{
+                ...state,
+                isLoading: false,
+                workers: [...state.workers.filter(worker => {return worker.id !== action.payload.id}), action.payload]
+            }
+        case EDITING_FAILURE:
             return{
             ...state,
             isLoading: false,
